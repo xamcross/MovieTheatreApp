@@ -1,5 +1,6 @@
 package dmytro.korniienko.entity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -14,6 +15,13 @@ public class Auditorium {
 	private List<Integer> vipSeats;
 	
 	private List<Calendar> datesBooked;
+	
+	public Auditorium (String name, int seats, List<Integer> vipSeats){
+		this.name = name;
+		this.seats = seats;
+		this.vipSeats = new ArrayList<>();
+		this.vipSeats.addAll(vipSeats);
+	}
 	
 	public String getName() {
 		return name;
@@ -39,6 +47,10 @@ public class Auditorium {
 			}
 		}
 		return true;
+	}
+	
+	public List<Calendar> getDatesBooked(){
+		return datesBooked;
 	}
 	
 	public int getSeats() {

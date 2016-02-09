@@ -1,5 +1,8 @@
 package dmytro.korniienko.entity;
 
+import java.util.Calendar;
+import java.util.List;
+
 public class Event {
 
 	private String name;
@@ -7,6 +10,8 @@ public class Event {
 	private double price;
 	
 	private Rating rating;
+	
+	private List<Calendar> date;
 
 	public String getName() {
 		return name;
@@ -30,6 +35,14 @@ public class Event {
 
 	public void setRating(Rating rating) {
 		this.rating = rating;
+	}
+
+	public List<Calendar> getDate() {
+		return date;
+	}
+
+	public void setDate(List<Calendar> date) {
+		this.date = date;
 	}
 	
 }

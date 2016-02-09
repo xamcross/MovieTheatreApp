@@ -1,26 +1,27 @@
 package dmytro.korniienko.service;
 
-import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import dmytro.korniienko.entity.Auditorium;
+import dmytro.korniienko.entity.Event;
 
 public class SimpleAuditoriumServiceImpl implements AuditoriumService {
 
+	private List<Auditorium> auditoriums;
+	
+	public SimpleAuditoriumServiceImpl(List<Auditorium> auditoriums) {
+		this.auditoriums = new ArrayList<>();
+		this.auditoriums.addAll(auditoriums);
+	}
+	
 	@Override
-	public List<Auditorium> getAuditoriums(File path) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Auditorium> getAuditoriums() {
+		return auditoriums;
 	}
 
 	@Override
-	public int getSeatsNumber(Auditorium auditorium) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<Integer> getVipSeats(Auditorium auditorium) {
+	public List<Event> getAllEvents() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -47,15 +47,13 @@ public class SimpleEventServiceImpl implements EventService {
 
 	@Override
 	public List<Event> getNextEvents(Calendar to) {
-
+		
 		return null;
 	}
 
 	@Override
 	public void assignAuditorium(Event event, Auditorium auditorium, Calendar date) {
-		if (auditoriums.contains(auditorium) && auditorium.checkDate(date)){
-			auditorium.addEvent(event, date);
-		}
+		
 	}
 
 }

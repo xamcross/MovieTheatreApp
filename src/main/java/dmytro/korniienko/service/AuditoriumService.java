@@ -1,16 +1,13 @@
 package dmytro.korniienko.service;
 
-import java.io.File;
 import java.util.List;
 
 import dmytro.korniienko.entity.Auditorium;
+import dmytro.korniienko.entity.Event;
 
 public interface AuditoriumService {
 
-	List<Auditorium> getAuditoriums(File path);
+	List<Auditorium> getAuditoriums();
 	
-	int getSeatsNumber(Auditorium auditorium);
-	
-	List<Integer> getVipSeats(Auditorium auditorium);
-	
+	List<Event> getAllEvents();
 }
