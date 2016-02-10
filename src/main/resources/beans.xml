@@ -200,4 +200,9 @@
 		<constructor-arg ref="bookingService" />
 	</bean>
 
+	<bean id="admin" class="dmytro.korniienko.app.TheaterAdmin">
+		<constructor-arg ref="eventService" />
+		<constructor-arg ref="bookingService" />
+	</bean>
+
 </beans>
