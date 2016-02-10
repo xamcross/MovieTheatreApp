@@ -1,29 +1,33 @@
 package dmytro.korniienko.service;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import dmytro.korniienko.entity.Auditorium;
 import dmytro.korniienko.entity.Event;
+import dmytro.korniienko.repository.AuditoriumRepository;
 
 public class SimpleAuditoriumServiceImpl implements AuditoriumService {
-
-	private List<Auditorium> auditoriums;
 	
-	public SimpleAuditoriumServiceImpl(List<Auditorium> auditoriums) {
-		this.auditoriums = new ArrayList<>();
-		this.auditoriums.addAll(auditoriums);
+	private AuditoriumRepository auditoriumRepository;
+	
+	public SimpleAuditoriumServiceImpl(AuditoriumRepository repo) {
+		this.auditoriumRepository = repo;
 	}
 	
 	@Override
 	public List<Auditorium> getAuditoriums() {
-		return auditoriums;
+		return auditoriumRepository.getAuditoriums();
 	}
 
 	@Override
-	public List<Event> getAllEvents() {
-		// TODO Auto-generated method stub
-		return null;
+	public void assignAuditorium(Event event, Auditorium auditorium, Date date) {
+		auditoriumRepository.addEvent(event, auditorium, date);
 	}
 
+	@Override
+	public Auditorium getAuditoriumByTime(Event event, Date time) {
+		return auditoriumRepository.getAuditoriumByTime(event, time);
+	}
+	
 }

@@ -2,6 +2,7 @@ package dmytro.korniienko.entity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Auditorium {
@@ -14,7 +15,7 @@ public class Auditorium {
 	
 	private List<Integer> vipSeats;
 	
-	private List<Calendar> datesBooked;
+	private List<Date> datesBooked;
 	
 	public Auditorium (String name, int seats, List<Integer> vipSeats){
 		this.name = name;
@@ -34,22 +35,8 @@ public class Auditorium {
 	public List<Event> getEvents() {
 		return events;
 	}
-
-	public void addEvent(Event event, Calendar date) {
-		this.events.add(event);
-		this.datesBooked.add(date);
-	}
-
-	public boolean checkDate(Calendar checkedDate){
-		for (Calendar date : datesBooked){
-			if (date.getTime() == checkedDate.getTime()){
-				return false;
-			}
-		}
-		return true;
-	}
 	
-	public List<Calendar> getDatesBooked(){
+	public List<Date> getDatesBooked(){
 		return datesBooked;
 	}
 	

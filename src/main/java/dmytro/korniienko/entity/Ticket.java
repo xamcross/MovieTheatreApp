@@ -6,13 +6,19 @@ public class Ticket {
 
 	private long id;
 	
-	private String movie;
+	private Event event;
 	
 	private Date time;
 	
 	private int seatNumber;
 	
 	private User user;
+	
+	public Ticket(Event event, Date time, int seatNumber) {
+		this.event = event;
+		this.time = time;
+		this.seatNumber = seatNumber;
+	}
 
 	public long getId() {
 		return id;
@@ -20,14 +26,6 @@ public class Ticket {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public String getMovie() {
-		return movie;
-	}
-
-	public void setMovie(String movie) {
-		this.movie = movie;
 	}
 
 	public Date getTime() {
@@ -52,5 +50,13 @@ public class Ticket {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
 	}
 }

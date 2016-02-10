@@ -1,66 +1,52 @@
 package dmytro.korniienko.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import dmytro.korniienko.entity.Ticket;
 import dmytro.korniienko.entity.User;
+import dmytro.korniienko.repository.UserRepository;
 
 public class SimpleUserServiceImpl implements UserService {
 
-	List<User> users;
+	private UserRepository userRepository;
 	
-	List<Ticket> tickets;
-	
+	private BookingService bookingService;
+
+	public SimpleUserServiceImpl(UserRepository userRepository, BookingService bookingService) {
+		this.userRepository = userRepository;
+		this.bookingService = bookingService;
+	}
+
 	@Override
 	public void register(User user) {
-		users.add(user);
+		userRepository.register(user);
 	}
 
 	@Override
 	public void remove(User user) {
-		users.remove(user);
+		userRepository.remove(user);
 	}
 
 	@Override
 	public User getById(long id) {
-		for(User user : users){
-			if (user.getId() == id){
-				return user;
-			}
-		}
-		return null;
+		return userRepository.getById(id);
 	}
 
 	@Override
 	public User getUserByEmail(String email) {
-		for(User user : users){
-			if (user.getEmail().equals(email)){
-				return user;
-			}
-		}
-		return null;
+		return userRepository.getByEmail(email);
 	}
 
 	@Override
 	public User getUserByName(String name) {
-		for(User user : users){
-			if (user.getName().equals(name)){
-				return user;
-			}
-		}
-		return null;
+
+		return userRepository.getByName(name);
 	}
 
 	@Override
 	public List<Ticket> getBookedTickets(User user) {
-		List<Ticket> bookedTickets = new ArrayList<>();
-		for (Ticket ticket : tickets){
-			if (ticket.getUser().equals(user)){
-				bookedTickets.add(ticket);
-			}
-		}
-		return bookedTickets;
+		
+		return bookingService.getByUser(user);
 	}
 
 }

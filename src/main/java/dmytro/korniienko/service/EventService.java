@@ -1,6 +1,6 @@
 package dmytro.korniienko.service;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import dmytro.korniienko.entity.Auditorium;
@@ -16,10 +16,10 @@ public interface EventService {
 	
 	List<Event> getAll();
 	
-	List<Event> getForDateRange(Calendar from, Calendar to);
+	List<Event> getForDateRange(Date from, Date to);
 	
-	List<Event> getNextEvents(Calendar to);
+	List<Event> getNextEvents(Date to);
 	
-	void assignAuditorium(Event event, Auditorium auditorium, Calendar date);
+	void assignAuditorium(Event event, Auditorium auditorium, Date date);
 	
 }

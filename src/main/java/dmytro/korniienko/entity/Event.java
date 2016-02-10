@@ -1,6 +1,6 @@
 package dmytro.korniienko.entity;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Event {
@@ -11,7 +11,9 @@ public class Event {
 	
 	private Rating rating;
 	
-	private List<Calendar> date;
+	private List<Date> date;
+	
+	private List<Auditorium> auditoriums;
 
 	public String getName() {
 		return name;
@@ -37,12 +39,20 @@ public class Event {
 		this.rating = rating;
 	}
 
-	public List<Calendar> getDate() {
+	public List<Date> getDate() {
 		return date;
 	}
 
-	public void setDate(List<Calendar> date) {
+	public void setDate(List<Date> date) {
 		this.date = date;
+	}
+
+	public List<Auditorium> getAuditoriums() {
+		return auditoriums;
+	}
+
+	public void setAuditoriums(List<Auditorium> auditoriums) {
+		this.auditoriums = auditoriums;
 	}
 	
 }

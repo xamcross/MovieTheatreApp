@@ -1,5 +1,7 @@
 package dmytro.korniienko.entity;
 
+import java.util.Date;
+
 public class User {
 
 	private long id;
@@ -8,8 +10,11 @@ public class User {
 	
 	private String email;
 	
-	public User(){
-		
+	private Date dateOfBirth;
+	
+	public User(String name, String email){
+		this.name = name;
+		this.email = email;
 	}
 
 	public long getId() {
@@ -34,6 +39,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	
