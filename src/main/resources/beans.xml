@@ -9,6 +9,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
 	xmlns:util="http://www.springframework.org/schema/util">
 
+<import resource="classpath:discountStrategies.xml"/>
 
 	<bean id="auditorium1" class="dmytro.korniienko.entity.Auditorium">
 		<constructor-arg value="${name}" />
@@ -185,15 +186,7 @@
 		<constructor-arg ref="strategies" />
 	</bean>
 
-	<bean id="strategyBirthday" class="dmytro.korniienko.model.BirthdayDiscountStrategy">
-	</bean>
-	<bean id="strategyLoyalty" class="dmytro.korniienko.model.LoyaltyDiscountStrategy">
-	</bean>
 
-	<util:list id="strategies">
-		<ref bean="strategyBirthday" />
-		<ref bean="strategyLoyalty" />
-	</util:list>
 
 	<bean id="userService" class="dmytro.korniienko.service.SimpleUserServiceImpl">
 		<constructor-arg ref="userRepo" />
