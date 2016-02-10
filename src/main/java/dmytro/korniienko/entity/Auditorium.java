@@ -1,7 +1,6 @@
 package dmytro.korniienko.entity;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +11,7 @@ public class Auditorium {
 	private List<Event> events;
 	
 	private int seats;
-	
+
 	private List<Integer> vipSeats;
 	
 	private List<Date> datesBooked;

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+            http://www.springframework.org/schema/context 
+            http://www.springframework.org/schema/context/spring-context-3.2.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-3.2.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util">
+
+
+	<bean id="auditorium1" class="dmytro.korniienko.entity.Auditorium">
+		<constructor-arg value="${name}" />
+		<constructor-arg value="${seats}" />
+		<constructor-arg>
+			<list>
+				<value>1</value>
+				<value>3</value>
+				<value>4</value>
+				<value>5</value>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="auditorium2" class="dmytro.korniienko.entity.Auditorium">
+		<constructor-arg value="Theatre 2" />
+		<constructor-arg value="320" />
+		<constructor-arg>
+			<list>
+				<value>11</value>
+				<value>12</value>
+				<value>13</value>
+				<value>14</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:auditorium.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<util:list id="auditoriums">
+		<ref bean="auditorium1" />
+		<ref bean="auditorium2" />
+	</util:list>
+
+	<bean id="auditoriumRepo"
+		class="dmytro.korniienko.repository.SimpleAuditoriumRepositoryImpl">
+		<constructor-arg ref="auditoriums" />
+	</bean>
+
+	<bean id="event1" class="dmytro.korniienko.entity.Event">
+		<property name="name" value="Die Hard" />
+		<property name="price" value="5.50" />
+	</bean>
+	<bean id="event2" class="dmytro.korniienko.entity.Event">
+		<property name="name" value="Rocky" />
+		<property name="price" value="4.99" />
+	</bean>
+	<bean id="event3" class="dmytro.korniienko.entity.Event">
+		<property name="name" value="Top Gun" />
+		<property name="price" value="6.00" />
+	</bean>
+	<util:list id="events">
+		<ref bean="event1" />
+		<ref bean="event2" />
+		<ref bean="event3" />
+	</util:list>
+
+
+	<bean id="eventRepo" class="dmytro.korniienko.repository.SimpleEventRepositoryImpl">
+		<constructor-arg ref="events" />
+	</bean>
+
+	<bean id="ticket1.1" class="dmytro.korniienko.entity.Ticket">
+		<constructor-arg ref="event1" />
+		<constructor-arg value="09-10-2016" type="java.util.Date" />
+		<constructor-arg value="5" />
+	</bean>
+	<bean id="ticket1.2" class="dmytro.korniienko.entity.Ticket">
+		<constructor-arg ref="event1" />
+		<constructor-arg value="10-10-2016" type="java.util.Date" />
+		<constructor-arg value="10" />
+	</bean>
+	<bean id="ticket1.3" class="dmytro.korniienko.entity.Ticket">
+		<constructor-arg ref="event1" />
+		<constructor-arg value="10-10-2016" type="java.util.Date" />
+		<constructor-arg value="7" />
+	</bean>
+	<bean id="ticket2.1" class="dmytro.korniienko.entity.Ticket">
+		<constructor-arg ref="event2" />
+		<constructor-arg value="05-10-2016" type="java.util.Date" />
+		<constructor-arg value="11" />
+	</bean>
+	<bean id="ticket2.2" class="dmytro.korniienko.entity.Ticket">
+		<constructor-arg ref="event2" />
+		<constructor-arg value="05-10-2016" type="java.util.Date" />
+		<constructor-arg value="93" />
+	</bean>
+	<bean id="ticket2.3" class="dmytro.korniienko.entity.Ticket">
+		<constructor-arg ref="event2" />
+		<constructor-arg value="07-10-2016" type="java.util.Date" />
+		<constructor-arg value="76" />
+	</bean>
+
+	<util:list id="tickets">
+		<ref bean="ticket1.1" />
+		<ref bean="ticket1.2" />
+		<ref bean="ticket1.3" />
+		<ref bean="ticket2.1" />
+		<ref bean="ticket2.2" />
+		<ref bean="ticket2.3" />
+	</util:list>
+
+	<bean id="ticketRepo" class="dmytro.korniienko.repository.SimpleTicketRepositoryImpl">
+		<constructor-arg ref="tickets" />
+	</bean>
+
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="customEditors">
+			<map>
+				<entry key="java.util.Date">
+					<ref local="customDateEditor" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="customDateEditor"
+		class="org.springframework.beans.propertyeditors.CustomDateEditor">
+		<constructor-arg>
+			<bean class="java.text.SimpleDateFormat">
+				<constructor-arg value="dd-MM-yyyy" />
+			</bean>
+		</constructor-arg>
+		<constructor-arg value="true" />
+	</bean>
+
+	<bean id="user1" class="dmytro.korniienko.entity.User">
+		<constructor-arg value="Vasia" />
+		<constructor-arg value="vasia123@gmail.com" />
+	</bean>
+	<bean id="user2" class="dmytro.korniienko.entity.User">
+		<constructor-arg value="Kolia" />
+		<constructor-arg value="kolian@gmail.com" />
+	</bean>
+	<bean id="user3" class="dmytro.korniienko.entity.User">
+		<constructor-arg value="Anna" />
+		<constructor-arg value="anna1998@gmail.com" />
+	</bean>
+
+	<util:list id="users">
+		<ref bean="user1" />
+		<ref bean="user2" />
+		<ref bean="user3" />
+	</util:list>
+
+	<bean id="userRepo" class="dmytro.korniienko.repository.SimpleUserRepositoryImpl">
+		<constructor-arg ref="users" />
+	</bean>
+
+	<bean id="auditoriumService" class="dmytro.korniienko.service.SimpleAuditoriumServiceImpl">
+		<constructor-arg ref="auditoriumRepo" />
+	</bean>
+
+	<bean id="bookingService" class="dmytro.korniienko.service.SimpleBookingServiceImpl">
+		<constructor-arg ref="ticketRepo" />
+		<constructor-arg ref="eventService" />
+		<constructor-arg ref="auditoriumService" />
+		<constructor-arg ref="discountService" />
+		<constructor-arg ref="ticket1.3" />
+	</bean>
+
+	<bean id="eventService" class="dmytro.korniienko.service.SimpleEventServiceImpl">
+		<constructor-arg ref="eventRepo" />
+		<constructor-arg ref="auditoriumService" />
+	</bean>
+
+	<bean id="discountService" class="dmytro.korniienko.service.SimpleDiscountServiceImpl">
+		<constructor-arg ref="strategies" />
+	</bean>
+
+	<bean id="strategyBirthday" class="dmytro.korniienko.model.BirthdayDiscountStrategy">
+	</bean>
+	<bean id="strategyLoyalty" class="dmytro.korniienko.model.LoyaltyDiscountStrategy">
+	</bean>
+
+	<util:list id="strategies">
+		<ref bean="strategyBirthday" />
+		<ref bean="strategyLoyalty" />
+	</util:list>
+
+	<bean id="userService" class="dmytro.korniienko.service.SimpleUserServiceImpl">
+		<constructor-arg ref="userRepo" />
+		<constructor-arg ref="bookingService" />
+	</bean>
+
+</beans>
