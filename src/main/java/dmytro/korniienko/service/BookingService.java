@@ -10,9 +10,9 @@ import dmytro.korniienko.entity.User;
 
 public interface BookingService {
 
-	double getTicketPrice(String eventName, Date date, List<Integer> seats, User user);
+	double assignTicketPrice(String eventName, Date date, List<Integer> seats, User user, Ticket ticket);
 	
-	void bookTicket(User user);
+	void bookTicket(User user, Ticket ticket);
 	
 	Map<String, Ticket> getTicketsForEvent(Event event);
 

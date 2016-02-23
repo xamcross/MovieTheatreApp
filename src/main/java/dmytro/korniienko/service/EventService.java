@@ -24,4 +24,6 @@ public interface EventService {
 	
 	Event getEventById(Long id);
 	
+	Map<String, Event> getEventsByAuditorium(Auditorium place);
+	
 }

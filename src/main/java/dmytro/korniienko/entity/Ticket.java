@@ -10,6 +10,8 @@ public class Ticket implements Comparable<Ticket>{
 	
 	private User user;
 	
+	private double price;
+	
 	public Ticket(Event event, int seatNumber) {
 		this.event = event;
 		this.seatNumber = seatNumber;
@@ -54,5 +56,13 @@ public class Ticket implements Comparable<Ticket>{
 	@Override
 	public int compareTo(Ticket o) {
 		return (int) (event.getDate().getTime() - o.getEvent().getDate().getTime());
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 }

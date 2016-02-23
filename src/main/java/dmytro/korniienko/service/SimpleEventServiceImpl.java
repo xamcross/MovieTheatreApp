@@ -61,4 +61,9 @@ public class SimpleEventServiceImpl implements EventService {
 		return eventRepository.getEventById(id);
 	}
 
+	@Override
+	public Map<String, Event> getEventsByAuditorium(Auditorium place) {
+		return eventRepository.getEventsForAuditorium(place);
+	}
+
 }

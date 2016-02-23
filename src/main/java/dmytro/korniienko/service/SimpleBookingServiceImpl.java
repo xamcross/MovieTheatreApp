@@ -26,14 +26,8 @@ public class SimpleBookingServiceImpl implements BookingService {
 	@Autowired
 	DiscountService discountService;
 
-	Ticket ticket;
-	
-	public SimpleBookingServiceImpl(Ticket ticket) {
-		this.ticket = ticket;
-	}
-
 	@Override
-	public double getTicketPrice(String eventName, Date date, List<Integer> seats, User user) {
+	public double assignTicketPrice(String eventName, Date date, List<Integer> seats, User user, Ticket ticket) {
 		Event event = eventService.getByName(eventName);
 		double totalPrice = 0.0;
 		Auditorium place = event.getAuditorium();
@@ -48,11 +42,12 @@ public class SimpleBookingServiceImpl implements BookingService {
 			priceOfTicket = priceOfTicket * discountService.getDiscount(user, event, date, ticket);
 			totalPrice += priceOfTicket;
 		}
+		ticket.setPrice(totalPrice);
 		return totalPrice;
 	}
 
 	@Override
-	public void bookTicket(User user) {
+	public void bookTicket(User user, Ticket ticket) {
 		ticket.setUser(user);
 		ticketRepository.bookTicket(ticket);
 	}
