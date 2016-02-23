@@ -1,6 +1,7 @@
 package dmytro.korniienko.entity;
 
 import java.util.Date;
+import java.util.Map;
 
 public class User {
 
@@ -11,6 +12,8 @@ public class User {
 	private String email;
 	
 	private Date dateOfBirth;
+	
+	private Map<String, Ticket> bookedTickets;
 	
 	public User(String name, String email){
 		this.name = name;
@@ -47,6 +50,14 @@ public class User {
 
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+	}
+
+	public Map<String, Ticket> getBookedTickets() {
+		return bookedTickets;
+	}
+
+	public void setBookedTickets(Map<String, Ticket> bookedTickets) {
+		this.bookedTickets = bookedTickets;
 	}
 
 	

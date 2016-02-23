@@ -16,7 +16,7 @@ public class BirthdayDiscountStrategy extends DiscountStrategy {
 	public double calculateDiscount(User user, Event event, Date date, Ticket ticket) {
 		double discountPercentage = 0.0;
 		if (user.getDateOfBirth().getTime() == new Date().getTime()){
-			discountPercentage = 5;
+			discountPercentage = 0.05;
 		}
 		return discountPercentage;
 	}

@@ -9,10 +9,10 @@ import dmytro.korniienko.entity.Event;
 import dmytro.korniienko.repository.AuditoriumRepository;
 
 public class SimpleAuditoriumServiceImpl implements AuditoriumService {
-	
+
 	@Autowired
 	private AuditoriumRepository auditoriumRepository;
-	
+
 	@Override
 	public Map<String, Auditorium> getAuditoriums() {
 		return auditoriumRepository.getAuditoriums();
@@ -27,6 +27,10 @@ public class SimpleAuditoriumServiceImpl implements AuditoriumService {
 	public Auditorium getAuditoriumById(Long id) {
 		return auditoriumRepository.getAuditoriumById(id);
 	}
-	
-	
+
+	@Override
+	public void createAuditorium(Auditorium place) {
+		auditoriumRepository.createAuditorium(place);
+	}
+
 }

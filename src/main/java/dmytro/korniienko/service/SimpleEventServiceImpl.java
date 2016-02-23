@@ -16,12 +16,9 @@ public class SimpleEventServiceImpl implements EventService {
 
 	@Autowired
 	private AuditoriumService auditoriumService;
-
 	
-	@Override
-	public void create(Event event) {
-		eventRepository.createEvent(event);
-	}
+	@Autowired
+	private BookingService bookingService;
 
 	@Override
 	public void remove(Event event) {
@@ -54,6 +51,7 @@ public class SimpleEventServiceImpl implements EventService {
 		event.setAuditorium(auditorium);
 		eventRepository.createEvent(event);
 		auditoriumService.assignAuditorium(event, auditorium);
+		bookingService.fillEventWithTickets(event);
 	}
 
 	@Override

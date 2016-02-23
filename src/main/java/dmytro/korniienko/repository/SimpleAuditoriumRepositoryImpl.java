@@ -33,4 +33,9 @@ public class SimpleAuditoriumRepositoryImpl implements AuditoriumRepository {
 		return null;
 	}
 
+	@Override
+	public void createAuditorium(Auditorium place) {
+		auditoriums.put(place.getName(), place);
+	}
+
 }

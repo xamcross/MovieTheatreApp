@@ -12,4 +12,6 @@ public interface AuditoriumService {
 	void assignAuditorium(Event event, Auditorium auditorium);
 	
 	Auditorium getAuditoriumById(Long id);
+	
+	void createAuditorium(Auditorium place);
 }

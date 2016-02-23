@@ -33,7 +33,7 @@ public class LoyaltyDiscountStrategy extends DiscountStrategy {
 		List<Ticket> ticketsList = new ArrayList<Ticket>(ticketsByUser.values());
 		Collections.sort(ticketsList);
 		if (ticketsList.indexOf(ticket) % 10 == 0){
-			discountPercentage = 50;
+			discountPercentage = 0.5;
 		}
 
 		return discountPercentage;

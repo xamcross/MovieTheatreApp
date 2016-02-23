@@ -16,4 +16,5 @@ public interface TicketRepository {
 
 	Ticket getTicketById(Long id);
 	
+	void createTicket(Ticket ticket);
 }

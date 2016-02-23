@@ -19,4 +19,6 @@ public interface BookingService {
 	Map<String, Ticket> getByUser(User user);
 	
 	Ticket getTicketById(Long id);
+	
+	void fillEventWithTickets(Event event);
 }

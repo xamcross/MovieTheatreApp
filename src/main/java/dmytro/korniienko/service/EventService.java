@@ -7,8 +7,6 @@ import dmytro.korniienko.entity.Auditorium;
 import dmytro.korniienko.entity.Event;
 
 public interface EventService {
-
-	void create(Event event);
 	
 	void remove(Event event);
 	

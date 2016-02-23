@@ -15,6 +15,7 @@ public class Ticket implements Comparable<Ticket>{
 	public Ticket(Event event, int seatNumber) {
 		this.event = event;
 		this.seatNumber = seatNumber;
+		this.price = event.getPrice();
 	}
 
 	public long getId() {

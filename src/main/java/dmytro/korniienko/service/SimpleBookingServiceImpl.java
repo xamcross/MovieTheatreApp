@@ -13,7 +13,7 @@ import dmytro.korniienko.entity.User;
 import dmytro.korniienko.repository.TicketRepository;
 
 public class SimpleBookingServiceImpl implements BookingService {
-	
+
 	@Autowired
 	TicketRepository ticketRepository;
 
@@ -35,7 +35,7 @@ public class SimpleBookingServiceImpl implements BookingService {
 		for (int seatNum : seats) {
 			double priceOfTicket = 0.0;
 			if (vipSeats.contains(seatNum)) {
-				priceOfTicket = event.getPrice() * 2;		
+				priceOfTicket = event.getPrice() * 2;
 			} else {
 				priceOfTicket = event.getPrice();
 			}
@@ -65,6 +65,16 @@ public class SimpleBookingServiceImpl implements BookingService {
 	@Override
 	public Ticket getTicketById(Long id) {
 		return ticketRepository.getTicketById(id);
+	}
+
+	@Override
+	public void fillEventWithTickets(Event event) {
+		if (event.getTickets().size() < event.getAuditorium().getSeats()) {
+			for (int ticketNumber = 0; ticketNumber < event.getAuditorium().getSeats(); ticketNumber++) {
+				Ticket newTicket = new Ticket(event, ticketNumber);
+				ticketRepository.createTicket(newTicket);
+			}
+		}
 	}
 
 }

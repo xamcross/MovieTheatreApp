@@ -12,4 +12,6 @@ public interface AuditoriumRepository {
 	void addEvent(Event event, Auditorium auditorium);
 
 	Auditorium getAuditoriumById(Long id);
+	
+	void createAuditorium(Auditorium place);
 }

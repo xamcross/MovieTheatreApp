@@ -51,4 +51,9 @@ public class SimpleTicketRepositoryImpl implements TicketRepository {
 		return null;
 	}
 
+	@Override
+	public void createTicket(Ticket ticket) {
+		tickets.put(ticket.toString(), ticket);
+	}
+
 }

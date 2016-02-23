@@ -66,9 +66,5 @@ public class Event {
 	public Map<String, Ticket> getTickets() {
 		return tickets;
 	}
-
-	public void setTickets(Map<String, Ticket> tickets) {
-		this.tickets = tickets;
-	}
 	
 }

@@ -21,7 +21,7 @@ public class SimpleDiscountServiceImpl implements DiscountService {
 		for (DiscountStrategy strategy : strategies){
 			fullDiscount += strategy.calculateDiscount(user, event, date, ticket);
 		}
-		return fullDiscount;
+		return fullDiscount < 1 ? fullDiscount : 1;
 	}
 
 }
