@@ -4,20 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import dmytro.korniienko.entity.Event;
 import dmytro.korniienko.entity.Ticket;
 import dmytro.korniienko.entity.User;
 
+@Component
 public class SimpleTicketRepositoryImpl implements TicketRepository {
 	
-	@Autowired
-	Map<String, Ticket> tickets;
-
-	@Override
-	public void bookTicket(Ticket ticket) {
-		tickets.put(ticket.toString(), ticket);
-	}
+	static Map<String, Ticket> tickets = new HashMap<>();
 
 	@Override
 	public Map<String, Ticket> getTicketsForEvent(Event event) {
@@ -34,8 +30,10 @@ public class SimpleTicketRepositoryImpl implements TicketRepository {
 	public Map<String, Ticket> getTicketsByUser(User user) {
 		Map<String, Ticket> usersTickets = new HashMap<>();
 		for (Ticket ticket : tickets.values()) {
-			if (ticket.getUser().equals(user)) {
-				usersTickets.put(ticket.toString(), ticket);
+			if (ticket.getUser() != null){
+				if (ticket.getUser().equals(user)) {
+					usersTickets.put(ticket.toString(), ticket);
+				}	
 			}
 		}
 		return usersTickets;

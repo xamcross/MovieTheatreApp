@@ -3,9 +3,11 @@ package dmytro.korniienko.repository;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import dmytro.korniienko.entity.User;
 
+@Component
 public class SimpleUserRepositoryImpl implements UserRepository {
 	
 	@Autowired

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import dmytro.korniienko.entity.Auditorium;
 import dmytro.korniienko.entity.Event;
@@ -12,6 +13,7 @@ import dmytro.korniienko.entity.Ticket;
 import dmytro.korniienko.entity.User;
 import dmytro.korniienko.repository.TicketRepository;
 
+@Component
 public class SimpleBookingServiceImpl implements BookingService {
 
 	@Autowired
@@ -27,29 +29,28 @@ public class SimpleBookingServiceImpl implements BookingService {
 	DiscountService discountService;
 
 	@Override
-	public double assignTicketPrice(String eventName, Date date, List<Integer> seats, User user, Ticket ticket) {
+	public double assignTicketPrice(String eventName, Date date, User user, Ticket ticket) {
 		Event event = eventService.getByName(eventName);
-		double totalPrice = 0.0;
 		Auditorium place = event.getAuditorium();
 		List<Integer> vipSeats = place.getVipSeats();
-		for (int seatNum : seats) {
-			double priceOfTicket = 0.0;
-			if (vipSeats.contains(seatNum)) {
-				priceOfTicket = event.getPrice() * 2;
-			} else {
-				priceOfTicket = event.getPrice();
-			}
-			priceOfTicket = priceOfTicket * discountService.getDiscount(user, event, date, ticket);
-			totalPrice += priceOfTicket;
+		
+		double priceOfTicket = 0.0;
+
+		if (vipSeats.contains(ticket.getSeatNumber())) {
+			priceOfTicket = event.getPrice() * 2;
+		} else {
+			priceOfTicket = event.getPrice();
 		}
-		ticket.setPrice(totalPrice);
-		return totalPrice;
+
+		priceOfTicket -= priceOfTicket * discountService.getDiscount(user, event, date, ticket);
+
+		ticket.setPrice(priceOfTicket);
+		return priceOfTicket;
 	}
 
 	@Override
 	public void bookTicket(User user, Ticket ticket) {
 		ticket.setUser(user);
-		ticketRepository.bookTicket(ticket);
 	}
 
 	@Override
@@ -70,11 +71,24 @@ public class SimpleBookingServiceImpl implements BookingService {
 	@Override
 	public void fillEventWithTickets(Event event) {
 		if (event.getTickets().size() < event.getAuditorium().getSeats()) {
+			System.out.println("This auditorium has " + event.getAuditorium().getSeats() + " seats");
 			for (int ticketNumber = 0; ticketNumber < event.getAuditorium().getSeats(); ticketNumber++) {
 				Ticket newTicket = new Ticket(event, ticketNumber);
+				event.getTickets().put(newTicket.toString(), newTicket);
 				ticketRepository.createTicket(newTicket);
 			}
 		}
+	}
+
+	@Override
+	public Ticket getTicketByEventAndSeat(Event event, int seatNumber) {
+		Map<String,Ticket> tickets = ticketRepository.getTicketsForEvent(event);
+		for (Ticket ticket : tickets.values()){
+			if (ticket.getSeatNumber() == seatNumber){
+				return ticket;
+			}
+		}
+		return null;
 	}
 
 }

@@ -18,14 +18,6 @@ public class LoyaltyDiscountStrategy extends DiscountStrategy {
 	@Autowired
 	BookingService bookingService;
 	
-	public LoyaltyDiscountStrategy() {
-		
-	}
-
-	public void setBookingService(BookingService bookingService){
-		this.bookingService = bookingService;
-	}
-	
 	@Override
 	public double calculateDiscount(User user, Event event, Date date, Ticket ticket) {
 		double discountPercentage = 0.0;

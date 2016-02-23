@@ -12,6 +12,10 @@ public class Ticket implements Comparable<Ticket>{
 	
 	private double price;
 	
+	public Ticket(){
+		
+	}
+	
 	public Ticket(Event event, int seatNumber) {
 		this.event = event;
 		this.seatNumber = seatNumber;

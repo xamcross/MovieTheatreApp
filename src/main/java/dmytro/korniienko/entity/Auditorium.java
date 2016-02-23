@@ -1,8 +1,11 @@
 package dmytro.korniienko.entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.stereotype.Component;
 
 public class Auditorium {
 
@@ -16,11 +19,16 @@ public class Auditorium {
 
 	private List<Integer> vipSeats;
 	
+	public Auditorium(){
+		
+	}
+	
 	public Auditorium (String name, int seats, List<Integer> vipSeats){
 		this.name = name;
 		this.numOfSeats = seats;
 		this.vipSeats = new ArrayList<>();
 		this.vipSeats.addAll(vipSeats);
+		this.events = new HashMap<>();
 	}
 	
 	public Long getId(){

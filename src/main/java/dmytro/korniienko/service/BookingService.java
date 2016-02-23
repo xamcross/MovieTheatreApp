@@ -10,7 +10,7 @@ import dmytro.korniienko.entity.User;
 
 public interface BookingService {
 
-	double assignTicketPrice(String eventName, Date date, List<Integer> seats, User user, Ticket ticket);
+	double assignTicketPrice(String eventName, Date date, User user, Ticket ticket);
 	
 	void bookTicket(User user, Ticket ticket);
 	
@@ -21,4 +21,6 @@ public interface BookingService {
 	Ticket getTicketById(Long id);
 	
 	void fillEventWithTickets(Event event);
+	
+	Ticket getTicketByEventAndSeat(Event event, int seatNumber);
 }

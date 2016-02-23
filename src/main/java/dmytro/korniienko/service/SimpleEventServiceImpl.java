@@ -4,11 +4,13 @@ import java.util.Date;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import dmytro.korniienko.entity.Auditorium;
 import dmytro.korniienko.entity.Event;
 import dmytro.korniienko.repository.EventRepository;
 
+@Component
 public class SimpleEventServiceImpl implements EventService {
 	
 	@Autowired

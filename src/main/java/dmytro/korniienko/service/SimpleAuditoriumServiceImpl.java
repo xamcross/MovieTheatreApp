@@ -3,11 +3,13 @@ package dmytro.korniienko.service;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import dmytro.korniienko.entity.Auditorium;
 import dmytro.korniienko.entity.Event;
 import dmytro.korniienko.repository.AuditoriumRepository;
 
+@Component
 public class SimpleAuditoriumServiceImpl implements AuditoriumService {
 
 	@Autowired

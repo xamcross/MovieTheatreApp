@@ -1,7 +1,10 @@
 package dmytro.korniienko.entity;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.stereotype.Component;
 
 public class Event {
 
@@ -19,6 +22,10 @@ public class Event {
 	
 	private Map<String, Ticket> tickets;
 
+	public Event(){
+		this.tickets = new HashMap<>();
+	}
+	
 	public Long getId(){
 		return id;
 	}

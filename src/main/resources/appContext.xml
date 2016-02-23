@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
             http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
             http://www.springframework.org/schema/context 
             http://www.springframework.org/schema/context/spring-context-4.2.xsd
             http://www.springframework.org/schema/util
             http://www.springframework.org/schema/util/spring-util-4.2.xsd"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:util="http://www.springframework.org/schema/util">
+
+	<context:annotation-config />
+	<context:component-scan base-package="dmytro.korniienko.repository" />
+	<context:component-scan base-package="dmytro.korniienko.service" />
+	<context:component-scan base-package="dmytro.korniienko.app" />
+	<context:component-scan base-package="dmytro.korniienko.entity" />
 
 	<import resource="classpath:discountStrategies.xml" />
 
@@ -56,6 +63,7 @@
 		<property name="name" value="Top Gun" />
 		<property name="price" value="6.00" />
 	</bean>
+
 	<util:map id="events">
 		<entry>
 			<key>
@@ -74,71 +82,6 @@
 				<value>Top Gun</value>
 			</key>
 			<ref bean="event3" />
-		</entry>
-	</util:map>
-
-
-	<bean id="ticket1.1" class="dmytro.korniienko.entity.Ticket">
-		<constructor-arg ref="event1" />
-		<constructor-arg value="5" />
-	</bean>
-	<bean id="ticket1.2" class="dmytro.korniienko.entity.Ticket">
-		<constructor-arg ref="event1" />
-		<constructor-arg value="10" />
-	</bean>
-	<bean id="ticket1.3" class="dmytro.korniienko.entity.Ticket">
-		<constructor-arg ref="event1" />
-		<constructor-arg value="7" />
-	</bean>
-	<bean id="ticket2.1" class="dmytro.korniienko.entity.Ticket">
-		<constructor-arg ref="event2" />
-		<constructor-arg value="11" />
-	</bean>
-	<bean id="ticket2.2" class="dmytro.korniienko.entity.Ticket">
-		<constructor-arg ref="event2" />
-		<constructor-arg value="93" />
-	</bean>
-	<bean id="ticket2.3" class="dmytro.korniienko.entity.Ticket">
-		<constructor-arg ref="event2" />
-		<constructor-arg value="76" />
-	</bean>
-
-	<util:map id="tickets">
-		<entry>
-			<key>
-				<value>tick1.1</value>
-			</key>
-			<ref bean="ticket1.1" />
-		</entry>
-		<entry>
-			<key>
-				<value>tick1.2</value>
-			</key>
-			<ref bean="ticket1.2" />
-		</entry>
-		<entry>
-			<key>
-				<value>tick1.3</value>
-			</key>
-			<ref bean="ticket1.3" />
-		</entry>
-		<entry>
-			<key>
-				<value>tick2.1</value>
-			</key>
-			<ref bean="ticket2.1" />
-		</entry>
-		<entry>
-			<key>
-				<value>tick2.2</value>
-			</key>
-			<ref bean="ticket2.2" />
-		</entry>
-		<entry>
-			<key>
-				<value>tick2.3</value>
-			</key>
-			<ref bean="ticket2.3" />
 		</entry>
 	</util:map>
 
@@ -169,10 +112,6 @@
 		<entry key="Kolia" value-ref="user2" />
 		<entry key="Anna" value-ref="user3" />
 	</util:map>
-
-	<bean id="bookingService" class="dmytro.korniienko.service.SimpleBookingServiceImpl">
-		<constructor-arg ref="ticket1.3" />
-	</bean>
 
 
 </beans>

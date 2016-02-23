@@ -8,8 +8,6 @@ import dmytro.korniienko.entity.User;
 
 public interface TicketRepository {
 
-	void bookTicket(Ticket ticket);
-
 	Map<String, Ticket> getTicketsForEvent(Event event);
 
 	Map<String, Ticket> getTicketsByUser(User user);

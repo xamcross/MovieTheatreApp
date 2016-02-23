@@ -4,12 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import dmytro.korniienko.entity.Event;
 import dmytro.korniienko.entity.Ticket;
 import dmytro.korniienko.entity.User;
 import dmytro.korniienko.model.DiscountStrategy;
 
+@Component
 public class SimpleDiscountServiceImpl implements DiscountService {
 	
 	@Autowired

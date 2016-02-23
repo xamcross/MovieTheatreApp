@@ -5,15 +5,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import dmytro.korniienko.entity.Auditorium;
 import dmytro.korniienko.entity.Event;
 
+@Component
 public class SimpleEventRepositoryImpl implements EventRepository {
 
 	@Autowired
 	Map<String, Event> events;
 
+	public SimpleEventRepositoryImpl(){
+
+	}
+	
 	@Override
 	public void createEvent(Event event) {
 		events.put(event.getName(), event);

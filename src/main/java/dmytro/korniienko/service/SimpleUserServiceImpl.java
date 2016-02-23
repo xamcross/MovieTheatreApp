@@ -3,11 +3,13 @@ package dmytro.korniienko.service;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import dmytro.korniienko.entity.Ticket;
 import dmytro.korniienko.entity.User;
 import dmytro.korniienko.repository.UserRepository;
 
+@Component
 public class SimpleUserServiceImpl implements UserService {
 
 	@Autowired

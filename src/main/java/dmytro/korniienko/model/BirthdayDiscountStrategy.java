@@ -8,10 +8,6 @@ import dmytro.korniienko.entity.User;
 
 public class BirthdayDiscountStrategy extends DiscountStrategy {
 
-	public BirthdayDiscountStrategy() {
-
-	}
-
 	@Override
 	public double calculateDiscount(User user, Event event, Date date, Ticket ticket) {
 		double discountPercentage = 0.0;
