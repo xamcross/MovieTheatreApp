@@ -1,7 +1,9 @@
 package dmytro.korniienko.service;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import dmytro.korniienko.entity.Auditorium;
 import dmytro.korniienko.entity.Event;
@@ -9,14 +11,12 @@ import dmytro.korniienko.repository.EventRepository;
 
 public class SimpleEventServiceImpl implements EventService {
 	
+	@Autowired
 	private EventRepository eventRepository;
 
+	@Autowired
 	private AuditoriumService auditoriumService;
-	
-	public SimpleEventServiceImpl(EventRepository repo, AuditoriumService service) {
-		this.eventRepository = repo;
-		this.auditoriumService = service;
-	}
+
 	
 	@Override
 	public void create(Event event) {
@@ -34,26 +34,31 @@ public class SimpleEventServiceImpl implements EventService {
 	}
 
 	@Override
-	public List<Event> getAll() {
+	public Map<String, Event> getAll() {
 		return eventRepository.getAll();
 	}
 
 	@Override
-	public List<Event> getForDateRange(Date from, Date to) {
+	public Map<String, Event> getForDateRange(Date from, Date to) {
 		return eventRepository.getForDateRange(from, to);
 	}
 
 	@Override
-	public List<Event> getNextEvents(Date to) {
+	public Map<String, Event> getNextEvents(Date to) {
 		return eventRepository.getNextEvents(to);
 	}
 
 	@Override
 	public void assignAuditorium(Event event, Auditorium auditorium, Date date) {
-		event.getDate().add(date);
-		event.getAuditoriums().add(auditorium);
+		event.setDate(date);
+		event.setAuditorium(auditorium);
 		eventRepository.createEvent(event);
-		auditoriumService.assignAuditorium(event, auditorium, date);
+		auditoriumService.assignAuditorium(event, auditorium);
+	}
+
+	@Override
+	public Event getEventById(Long id) {
+		return eventRepository.getEventById(id);
 	}
 
 }

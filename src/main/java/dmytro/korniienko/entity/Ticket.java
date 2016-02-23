@@ -1,22 +1,17 @@
 package dmytro.korniienko.entity;
 
-import java.util.Date;
+public class Ticket implements Comparable<Ticket>{
 
-public class Ticket {
-
-	private long id;
+	private Long id;
 	
 	private Event event;
-	
-	private Date time;
 	
 	private int seatNumber;
 	
 	private User user;
 	
-	public Ticket(Event event, Date time, int seatNumber) {
+	public Ticket(Event event, int seatNumber) {
 		this.event = event;
-		this.time = time;
 		this.seatNumber = seatNumber;
 	}
 
@@ -26,14 +21,6 @@ public class Ticket {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public Date getTime() {
-		return time;
-	}
-
-	public void setTime(Date time) {
-		this.time = time;
 	}
 
 	public int getSeatNumber() {
@@ -58,5 +45,14 @@ public class Ticket {
 
 	public void setEvent(Event event) {
 		this.event = event;
+	}
+	
+	public String toString(){
+		return "Event : " + this.event + "\nSeat : " + this.seatNumber + "\nTime : ";
+	}
+
+	@Override
+	public int compareTo(Ticket o) {
+		return (int) (event.getDate().getTime() - o.getEvent().getDate().getTime());
 	}
 }

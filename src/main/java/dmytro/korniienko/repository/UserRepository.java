@@ -8,10 +8,10 @@ public interface UserRepository {
 
 	void remove(User user);
 
-	User getById(long id);
-
 	User getByEmail(String email);
 
 	User getByName(String name);
+	
+	User getUserById(Long id);
 
 }

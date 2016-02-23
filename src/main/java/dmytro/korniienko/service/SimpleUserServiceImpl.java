@@ -1,6 +1,8 @@
 package dmytro.korniienko.service;
 
-import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import dmytro.korniienko.entity.Ticket;
 import dmytro.korniienko.entity.User;
@@ -8,14 +10,12 @@ import dmytro.korniienko.repository.UserRepository;
 
 public class SimpleUserServiceImpl implements UserService {
 
+	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
 	private BookingService bookingService;
 
-	public SimpleUserServiceImpl(UserRepository userRepository, BookingService bookingService) {
-		this.userRepository = userRepository;
-		this.bookingService = bookingService;
-	}
 
 	@Override
 	public void register(User user) {
@@ -25,11 +25,6 @@ public class SimpleUserServiceImpl implements UserService {
 	@Override
 	public void remove(User user) {
 		userRepository.remove(user);
-	}
-
-	@Override
-	public User getById(long id) {
-		return userRepository.getById(id);
 	}
 
 	@Override
@@ -44,9 +39,15 @@ public class SimpleUserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<Ticket> getBookedTickets(User user) {
+	public Map<String, Ticket> getBookedTickets(User user) {
 		
 		return bookingService.getByUser(user);
 	}
+
+	@Override
+	public User getUserById(Long id) {
+		return userRepository.getUserById(id);
+	}
+
 
 }

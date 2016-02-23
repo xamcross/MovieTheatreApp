@@ -1,7 +1,6 @@
 package dmytro.korniienko.repository;
 
-import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 import dmytro.korniienko.entity.Event;
 import dmytro.korniienko.entity.Ticket;
@@ -11,8 +10,10 @@ public interface TicketRepository {
 
 	void bookTicket(Ticket ticket);
 
-	List<Ticket> getTicketsForEvent(Event event, Date date);
+	Map<String, Ticket> getTicketsForEvent(Event event);
 
-	List<Ticket> getTicketsByUser(User user);
+	Map<String, Ticket> getTicketsByUser(User user);
+
+	Ticket getTicketById(Long id);
 	
 }

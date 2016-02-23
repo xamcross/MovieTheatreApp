@@ -1,20 +1,28 @@
 package dmytro.korniienko.entity;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 public class Event {
 
+	private Long id;
+	
 	private String name;
 	
 	private double price;
 	
 	private Rating rating;
 	
-	private List<Date> date;
+	private Date date;
 	
-	private List<Auditorium> auditoriums;
+	private Auditorium auditorium;
+	
+	private Map<String, Ticket> tickets;
 
+	public Long getId(){
+		return id;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -39,20 +47,28 @@ public class Event {
 		this.rating = rating;
 	}
 
-	public List<Date> getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(List<Date> date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
-	public List<Auditorium> getAuditoriums() {
-		return auditoriums;
+	public Auditorium getAuditorium() {
+		return auditorium;
 	}
 
-	public void setAuditoriums(List<Auditorium> auditoriums) {
-		this.auditoriums = auditoriums;
+	public void setAuditorium(Auditorium auditorium) {
+		this.auditorium = auditorium;
+	}
+
+	public Map<String, Ticket> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(Map<String, Ticket> tickets) {
+		this.tickets = tickets;
 	}
 	
 }

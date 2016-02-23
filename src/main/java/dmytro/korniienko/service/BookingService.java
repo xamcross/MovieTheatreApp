@@ -2,6 +2,7 @@ package dmytro.korniienko.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import dmytro.korniienko.entity.Event;
 import dmytro.korniienko.entity.Ticket;
@@ -13,8 +14,9 @@ public interface BookingService {
 	
 	void bookTicket(User user);
 	
-	List<Ticket> getTicketsForEvent(Event event, Date date);
+	Map<String, Ticket> getTicketsForEvent(Event event);
 
-	List<Ticket> getByUser(User user);
+	Map<String, Ticket> getByUser(User user);
 	
+	Ticket getTicketById(Long id);
 }

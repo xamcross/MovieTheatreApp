@@ -1,16 +1,15 @@
 package dmytro.korniienko.service;
 
-import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 import dmytro.korniienko.entity.Auditorium;
 import dmytro.korniienko.entity.Event;
 
 public interface AuditoriumService {
 
-	List<Auditorium> getAuditoriums();
+	Map<String, Auditorium> getAuditoriums();
 
-	void assignAuditorium(Event event, Auditorium auditorium, Date date);
+	void assignAuditorium(Event event, Auditorium auditorium);
 	
-	Auditorium getAuditoriumByTime(Event event, Date time);
+	Auditorium getAuditoriumById(Long id);
 }

@@ -1,20 +1,19 @@
 package dmytro.korniienko.repository;
 
-import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import dmytro.korniienko.entity.User;
 
 public class SimpleUserRepositoryImpl implements UserRepository {
-
-	List<User> users;
-
-	public SimpleUserRepositoryImpl(List<User> users) {
-		this.users = users;
-	}
+	
+	@Autowired
+	Map<String, User> users;
 
 	@Override
 	public void register(User user) {
-		users.add(user);
+		users.put(user.getName(), user);
 	}
 
 	@Override
@@ -23,14 +22,9 @@ public class SimpleUserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
-	public User getById(long id) {
-		return users.get((int)id);
-	}
-
-	@Override
 	public User getByEmail(String email) {
-		for (User user : users){
-			if (user.getEmail().equals(email)){
+		for (User user : users.values()) {
+			if (user.getEmail().equals(email)) {
 				return user;
 			}
 		}
@@ -39,8 +33,18 @@ public class SimpleUserRepositoryImpl implements UserRepository {
 
 	@Override
 	public User getByName(String name) {
-		for (User user : users){
-			if (user.getName().equals(name)){
+		for (User user : users.values()) {
+			if (user.getName().equals(name)) {
+				return user;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public User getUserById(Long id) {
+		for (User user : users.values()){
+			if(user.getId() == id){
 				return user;
 			}
 		}

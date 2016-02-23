@@ -1,26 +1,30 @@
 package dmytro.korniienko.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class Auditorium {
 
+	private Long id;
+	
 	private String name;
 	
-	private List<Event> events;
+	private Map<String, Event> events;
 	
-	private int seats;
+	private int numOfSeats;
 
 	private List<Integer> vipSeats;
 	
-	private List<Date> datesBooked;
-	
 	public Auditorium (String name, int seats, List<Integer> vipSeats){
 		this.name = name;
-		this.seats = seats;
+		this.numOfSeats = seats;
 		this.vipSeats = new ArrayList<>();
 		this.vipSeats.addAll(vipSeats);
+	}
+	
+	public Long getId(){
+		return id;
 	}
 	
 	public String getName() {
@@ -31,20 +35,16 @@ public class Auditorium {
 		this.name = name;
 	}
 
-	public List<Event> getEvents() {
+	public Map<String, Event> getEvents() {
 		return events;
 	}
-	
-	public List<Date> getDatesBooked(){
-		return datesBooked;
-	}
-	
+
 	public int getSeats() {
-		return seats;
+		return numOfSeats;
 	}
 
 	public void setSeats(int seats) {
-		this.seats = seats;
+		this.numOfSeats = seats;
 	}
 
 	public List<Integer> getVipSeats() {

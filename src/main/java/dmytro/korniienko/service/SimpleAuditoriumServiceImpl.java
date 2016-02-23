@@ -1,7 +1,8 @@
 package dmytro.korniienko.service;
 
-import java.util.Date;
-import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import dmytro.korniienko.entity.Auditorium;
 import dmytro.korniienko.entity.Event;
@@ -9,25 +10,23 @@ import dmytro.korniienko.repository.AuditoriumRepository;
 
 public class SimpleAuditoriumServiceImpl implements AuditoriumService {
 	
+	@Autowired
 	private AuditoriumRepository auditoriumRepository;
 	
-	public SimpleAuditoriumServiceImpl(AuditoriumRepository repo) {
-		this.auditoriumRepository = repo;
-	}
-	
 	@Override
-	public List<Auditorium> getAuditoriums() {
+	public Map<String, Auditorium> getAuditoriums() {
 		return auditoriumRepository.getAuditoriums();
 	}
 
 	@Override
-	public void assignAuditorium(Event event, Auditorium auditorium, Date date) {
-		auditoriumRepository.addEvent(event, auditorium, date);
+	public void assignAuditorium(Event event, Auditorium auditorium) {
+		auditoriumRepository.addEvent(event, auditorium);
 	}
 
 	@Override
-	public Auditorium getAuditoriumByTime(Event event, Date time) {
-		return auditoriumRepository.getAuditoriumByTime(event, time);
+	public Auditorium getAuditoriumById(Long id) {
+		return auditoriumRepository.getAuditoriumById(id);
 	}
+	
 	
 }

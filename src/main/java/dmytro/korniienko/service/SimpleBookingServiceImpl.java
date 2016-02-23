@@ -2,6 +2,9 @@ package dmytro.korniienko.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import dmytro.korniienko.entity.Auditorium;
 import dmytro.korniienko.entity.Event;
@@ -11,22 +14,21 @@ import dmytro.korniienko.repository.TicketRepository;
 
 public class SimpleBookingServiceImpl implements BookingService {
 	
+	@Autowired
 	TicketRepository ticketRepository;
 
+	@Autowired
 	EventService eventService;
 
+	@Autowired
 	AuditoriumService auditoriumService;
 
+	@Autowired
 	DiscountService discountService;
 
 	Ticket ticket;
 	
-	public SimpleBookingServiceImpl(TicketRepository repo, EventService eventService,
-			AuditoriumService auditoriumService, DiscountService discountService, Ticket ticket) {
-		this.ticketRepository = repo;
-		this.eventService = eventService;
-		this.auditoriumService = auditoriumService;
-		this.discountService = discountService;
+	public SimpleBookingServiceImpl(Ticket ticket) {
 		this.ticket = ticket;
 	}
 
@@ -34,7 +36,7 @@ public class SimpleBookingServiceImpl implements BookingService {
 	public double getTicketPrice(String eventName, Date date, List<Integer> seats, User user) {
 		Event event = eventService.getByName(eventName);
 		double totalPrice = 0.0;
-		Auditorium place = auditoriumService.getAuditoriumByTime(event, date);
+		Auditorium place = event.getAuditorium();
 		List<Integer> vipSeats = place.getVipSeats();
 		for (int seatNum : seats) {
 			double priceOfTicket = 0.0;
@@ -56,13 +58,18 @@ public class SimpleBookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public List<Ticket> getTicketsForEvent(Event event, Date date) {
-		return ticketRepository.getTicketsForEvent(event, date);
+	public Map<String, Ticket> getTicketsForEvent(Event event) {
+		return ticketRepository.getTicketsForEvent(event);
 	}
 
 	@Override
-	public List<Ticket> getByUser(User user) {
+	public Map<String, Ticket> getByUser(User user) {
 		return ticketRepository.getTicketsByUser(user);
+	}
+
+	@Override
+	public Ticket getTicketById(Long id) {
+		return ticketRepository.getTicketById(id);
 	}
 
 }
