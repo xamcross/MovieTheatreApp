@@ -6,15 +6,21 @@
             http://www.springframework.org/schema/context 
             http://www.springframework.org/schema/context/spring-context-4.2.xsd
             http://www.springframework.org/schema/util
-            http://www.springframework.org/schema/util/spring-util-4.2.xsd"
+            http://www.springframework.org/schema/util/spring-util-4.2.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop.xsd"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:util="http://www.springframework.org/schema/util">
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop">
 
 	<context:annotation-config />
 	<context:component-scan base-package="dmytro.korniienko.repository" />
 	<context:component-scan base-package="dmytro.korniienko.service" />
 	<context:component-scan base-package="dmytro.korniienko.app" />
 	<context:component-scan base-package="dmytro.korniienko.entity" />
+	<context:component-scan base-package="dmytro.korniienko.aspect" />
+
+	<aop:aspectj-autoproxy />
 
 	<import resource="classpath:discountStrategies.xml" />
 

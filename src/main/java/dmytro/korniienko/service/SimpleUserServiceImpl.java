@@ -51,5 +51,11 @@ public class SimpleUserServiceImpl implements UserService {
 		return userRepository.getUserById(id);
 	}
 
+	@Override
+	public void bookTicket(User user, Ticket ticket) {
+		user.getBookedTickets().put(ticket.toString(), ticket);
+		bookingService.bookTicket(user, ticket);
+	}
+
 
 }

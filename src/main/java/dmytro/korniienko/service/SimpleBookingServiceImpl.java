@@ -74,6 +74,7 @@ public class SimpleBookingServiceImpl implements BookingService {
 			System.out.println("This auditorium has " + event.getAuditorium().getSeats() + " seats");
 			for (int ticketNumber = 0; ticketNumber < event.getAuditorium().getSeats(); ticketNumber++) {
 				Ticket newTicket = new Ticket(event, ticketNumber);
+				newTicket.setPrice(event.getPrice());
 				event.getTickets().put(newTicket.toString(), newTicket);
 				ticketRepository.createTicket(newTicket);
 			}

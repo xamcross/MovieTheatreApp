@@ -18,4 +18,6 @@ public interface UserService {
 	Map<String, Ticket> getBookedTickets(User user);
 	
 	User getUserById(Long id);
+	
+	void bookTicket(User user, Ticket ticket);
 }

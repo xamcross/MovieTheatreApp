@@ -3,8 +3,6 @@ package dmytro.korniienko.entity;
 import java.util.Date;
 import java.util.Map;
 
-import org.springframework.stereotype.Component;
-
 public class User {
 
 	private Long id;
@@ -67,5 +65,4 @@ public class User {
 		this.bookedTickets = bookedTickets;
 	}
 
-	
 }

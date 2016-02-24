@@ -24,6 +24,10 @@ public class Launcher {
 		
 		User vasiliy = admin.registerNewUser(new User(DUMMY_USER_NAME, DUMMY_USER_EMAIL));
 		admin.getTicketPrice(newEvent.getName(), newEvent.getDate(), vasiliy, DUMMY_SEAT_NUMBER_VIP);
+		
+		Customer customer = (Customer) ctx.getBean("customer");
+		
+		
 		ctx.close();
 	}
 
