@@ -1,6 +1,5 @@
 package dmytro.korniienko.app;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,6 @@ import dmytro.korniienko.entity.Auditorium;
 import dmytro.korniienko.entity.Event;
 import dmytro.korniienko.entity.Ticket;
 import dmytro.korniienko.entity.User;
-import dmytro.korniienko.repository.EventRepository;
 import dmytro.korniienko.service.AuditoriumService;
 import dmytro.korniienko.service.BookingService;
 import dmytro.korniienko.service.EventService;
@@ -20,60 +18,58 @@ import dmytro.korniienko.service.UserService;
 
 @Component
 public class TheaterAdmin {
-	
+
 	@Autowired
-	EventRepository eventRepository;
-	
+	private EventService eventService;
+
 	@Autowired
-	EventService eventService;
-	
+	private BookingService bookingService;
+
 	@Autowired
-	BookingService bookingService;
-	
+	private AuditoriumService auditoriumService;
+
 	@Autowired
-	AuditoriumService auditoriumService;
-	
-	@Autowired
-	UserService userService;
-	
+	private UserService userService;
+
 	public Event createNewEvent(String name, Date date, Double price) {
-		System.out.println(eventRepository);
 		Event newEvent = new Event();
-		List<Integer> vipSeats = new ArrayList<>();
-		vipSeats.add(10);
-		vipSeats.add(11);
-		vipSeats.add(12);
-		vipSeats.add(13);
-		vipSeats.add(14);
-		vipSeats.add(15);
-		Auditorium newPlace = new Auditorium("Royal Theatre", 500, vipSeats);
-		
-		auditoriumService.createAuditorium(newPlace);
 		newEvent.setName(name);
 		newEvent.setDate(date);
 		newEvent.setPrice(price);
-		newEvent.setAuditorium(newPlace);
-		eventService.assignAuditorium(newEvent, newPlace, date);
-		System.out.println("Created event : " + newEvent.getName() + " at " + newEvent.getAuditorium().getName()
-				+ " for " + newEvent.getAuditorium().getSeats() + " seats");
-		System.out.println("Number of tickets available for " + newEvent.getName() + " = " + newEvent.getTickets().size());
+
+		System.out.println("Created event : " + newEvent.getName());
+
 		return newEvent;
+	}
+
+	public Auditorium addNewAuditorium(String name, int numberOfSeats, List<Integer> vipSeats) {
+		Auditorium newPlace = new Auditorium("Royal Theatre", numberOfSeats, vipSeats);
+		auditoriumService.createAuditorium(newPlace);
+		System.out.println("Added new venue : " + newPlace.getName());
+		return newPlace;
+	}
+
+	public void assignEventToAuditorium(Auditorium place, Event event) {
+		event.setAuditorium(place);
+		eventService.assignAuditorium(event, place, event.getDate());
+		System.out.println(event.getName() + " will take place at " + place.getName());
 	}
 
 	public Map<String, Ticket> getBookedTickets(Event event) {
 		return bookingService.getTicketsForEvent(event);
 	}
 
-	public double getTicketPrice(String eventName, Date date, User user, int seatNumber){
+	public double getTicketPrice(String eventName, User user, int seatNumber) {
 		Event event = eventService.getByName(eventName);
-		double ticketPrice = bookingService.assignTicketPrice(eventName, date, user, bookingService.getTicketByEventAndSeat(event, seatNumber));
+		double ticketPrice = bookingService.assignTicketPrice(eventName, user,
+				bookingService.getTicketByEventAndSeat(event, seatNumber));
 		System.out.println("Price of ticket for " + eventName + " seat number " + seatNumber + " is : " + ticketPrice);
 		return ticketPrice;
 	}
-	
-	public User registerNewUser(User user){
+
+	public User registerNewUser(User user) {
 		userService.register(user);
 		return user;
 	}
-	
+
 }

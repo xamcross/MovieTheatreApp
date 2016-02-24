@@ -8,6 +8,6 @@ import dmytro.korniienko.entity.User;
 
 public abstract class DiscountStrategy {
 
-	public abstract double calculateDiscount(User user, Event event, Date date, Ticket ticket);
+	public abstract double calculateDiscount(User user, Event event, Ticket ticket);
 
 }

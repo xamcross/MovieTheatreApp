@@ -12,7 +12,7 @@ import dmytro.korniienko.entity.Event;
 public class SimpleAuditoriumRepositoryImpl implements AuditoriumRepository {
 	
 	@Autowired
-	Map<String, Auditorium> auditoriums;
+	private Map<String, Auditorium> auditoriums;
 
 
 	@Override

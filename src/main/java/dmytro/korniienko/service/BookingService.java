@@ -1,7 +1,5 @@
 package dmytro.korniienko.service;
 
-import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import dmytro.korniienko.entity.Event;
@@ -10,7 +8,7 @@ import dmytro.korniienko.entity.User;
 
 public interface BookingService {
 
-	double assignTicketPrice(String eventName, Date date, User user, Ticket ticket);
+	double assignTicketPrice(String eventName, User user, Ticket ticket);
 	
 	void bookTicket(User user, Ticket ticket);
 	

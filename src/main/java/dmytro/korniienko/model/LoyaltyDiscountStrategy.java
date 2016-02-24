@@ -1,9 +1,5 @@
 package dmytro.korniienko.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +12,16 @@ import dmytro.korniienko.service.BookingService;
 public class LoyaltyDiscountStrategy extends DiscountStrategy {
 
 	@Autowired
-	BookingService bookingService;
+	private BookingService bookingService;
 	
 	@Override
-	public double calculateDiscount(User user, Event event, Date date, Ticket ticket) {
+	public double calculateDiscount(User user, Event event, Ticket ticket) {
 		double discountPercentage = 0.0;
 		Map<String, Ticket> ticketsByUser = bookingService.getByUser(user);
-		List<Ticket> ticketsList = new ArrayList<Ticket>(ticketsByUser.values());
-		Collections.sort(ticketsList);
-		if (ticketsList.indexOf(ticket) % 10 == 0){
+		if (ticketsByUser.size() % 9 == 0 && ticketsByUser.size() > 0){
 			discountPercentage = 0.5;
 		}
-
+		
 		return discountPercentage;
 	}
 	

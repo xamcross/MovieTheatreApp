@@ -13,7 +13,7 @@ import dmytro.korniienko.entity.User;
 @Component
 public class SimpleTicketRepositoryImpl implements TicketRepository {
 	
-	static Map<String, Ticket> tickets = new HashMap<>();
+	static private Map<String, Ticket> tickets = new HashMap<>();
 
 	@Override
 	public Map<String, Ticket> getTicketsForEvent(Event event) {

@@ -1,6 +1,5 @@
 package dmytro.korniienko.service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,19 +16,16 @@ import dmytro.korniienko.repository.TicketRepository;
 public class SimpleBookingServiceImpl implements BookingService {
 
 	@Autowired
-	TicketRepository ticketRepository;
+	private TicketRepository ticketRepository;
 
 	@Autowired
-	EventService eventService;
+	private EventService eventService;
 
 	@Autowired
-	AuditoriumService auditoriumService;
-
-	@Autowired
-	DiscountService discountService;
+	private DiscountService discountService;
 
 	@Override
-	public double assignTicketPrice(String eventName, Date date, User user, Ticket ticket) {
+	public double assignTicketPrice(String eventName, User user, Ticket ticket) {
 		Event event = eventService.getByName(eventName);
 		Auditorium place = event.getAuditorium();
 		List<Integer> vipSeats = place.getVipSeats();
@@ -42,7 +38,7 @@ public class SimpleBookingServiceImpl implements BookingService {
 			priceOfTicket = event.getPrice();
 		}
 
-		priceOfTicket -= priceOfTicket * discountService.getDiscount(user, event, date, ticket);
+		priceOfTicket -= priceOfTicket * discountService.getDiscount(user, event, ticket);
 
 		ticket.setPrice(priceOfTicket);
 		return priceOfTicket;
@@ -50,6 +46,7 @@ public class SimpleBookingServiceImpl implements BookingService {
 
 	@Override
 	public void bookTicket(User user, Ticket ticket) {
+		assignTicketPrice(ticket.getEvent().getName(), user, ticket);
 		ticket.setUser(user);
 	}
 

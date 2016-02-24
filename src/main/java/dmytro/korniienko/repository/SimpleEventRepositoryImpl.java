@@ -14,7 +14,7 @@ import dmytro.korniienko.entity.Event;
 public class SimpleEventRepositoryImpl implements EventRepository {
 
 	@Autowired
-	Map<String, Event> events;
+	private Map<String, Event> events;
 
 	public SimpleEventRepositoryImpl(){
 

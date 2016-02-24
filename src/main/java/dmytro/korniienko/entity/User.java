@@ -1,6 +1,7 @@
 package dmytro.korniienko.entity;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class User {
@@ -11,9 +12,9 @@ public class User {
 	
 	private String email;
 	
-	private Date dateOfBirth;
+	private Date dateOfBirth = new Date(1);
 	
-	private Map<String, Ticket> bookedTickets;
+	private Map<String, Ticket> bookedTickets = new HashMap<>();
 	
 	public User(){
 		
@@ -22,7 +23,6 @@ public class User {
 	public User(String name, String email){
 		this.name = name;
 		this.email = email;
-		this.dateOfBirth = new Date(1);
 	}
 
 	public long getId() {

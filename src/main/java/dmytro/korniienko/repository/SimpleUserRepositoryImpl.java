@@ -11,7 +11,7 @@ import dmytro.korniienko.entity.User;
 public class SimpleUserRepositoryImpl implements UserRepository {
 	
 	@Autowired
-	Map<String, User> users;
+	private Map<String, User> users;
 
 	@Override
 	public void register(User user) {
